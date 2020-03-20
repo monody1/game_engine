@@ -3,4 +3,15 @@ project(game_engine)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(game_engine main.cpp)
+include_directories(
+        ${CMAKE_SOURCE_DIR}/Framework/common
+        ${CMAKE_SOURCE_DIR}/Framework/interface
+)
+
+add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/framework
+)
+
+add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/empty
+)
