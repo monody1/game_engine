@@ -6,5 +6,5 @@
 
 namespace engine{
     BaseApplication g_App;
-    IApplication *g_pApp = &g_pApp;
+    IApplication *g_pApp = &g_App;
 }

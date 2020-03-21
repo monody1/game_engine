@@ -13,7 +13,7 @@ namespace engine{
     public:
         ~IRuntimeModule() {};
         //Init module
-        virtual void Initialize() = 0;
+        virtual int Initialize() = 0;
         //clean up module
         virtual void Finalize() = 0;
         //drive module do its work in particular cycle

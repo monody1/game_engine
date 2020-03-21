@@ -4,21 +4,21 @@
 using namespace engine;
 
 namespace engine {
-    extern IApplication *g_p_app;
+    extern IApplication *g_pApp;
 }
 
 int main() {
     int ret;
 
-    if ((ret = g_p_app -> Initialize() != 0)){
+    if ((ret = g_pApp -> Initialize() != 0)){
         std::cout << "App Initialize failed, will exit now." << std::endl;
         return ret;
     }
-    while(!g_p_app -> IsQuit()) {
-        g_p_app->Tick();
+    while(!g_pApp -> IsQuit()) {
+        g_pApp->Tick();
     }
 
-    g_p_app->Finalize();
+    g_pApp->Finalize();
 
     return 0;
 }
