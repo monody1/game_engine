@@ -4,8 +4,10 @@
 
 #include "base_application.hpp"
 
+bool engine::BaseApplication::m_bQuit = false;
+
 int engine::BaseApplication::Initialize() {
-    b_quit_ = false;
+    std::cout << m_Config;
     return 0;
 }
 
@@ -18,5 +20,8 @@ void engine::BaseApplication::Tick() {
 }
 
 bool engine::BaseApplication::IsQuit() {
-    return b_quit_;
+    return m_bQuit;
 }
+
+engine::BaseApplication::BaseApplication(const engine::GfxConfiguration &Config)
+: m_Config(Config) {}

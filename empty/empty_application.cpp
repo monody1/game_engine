@@ -5,6 +5,7 @@
 #include "base_application.hpp"
 
 namespace engine{
-    BaseApplication g_App;
+    GfxConfiguration config;
+    BaseApplication g_App = BaseApplication(config);
     IApplication *g_pApp = &g_App;
 }

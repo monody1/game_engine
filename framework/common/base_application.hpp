@@ -6,10 +6,15 @@
 #define GAME_ENGINE_BASE_APPLICATION_HPP
 
 #include "appliction.hpp"
+#include "GfxConfiguration.hpp"
 
 namespace engine {
     class BaseApplication: implements IApplication{
     public:
+        BaseApplication(const GfxConfiguration &mConfig);
+
+        BaseApplication() = delete;
+
         int Initialize() override ;
 
         void Finalize() override;
@@ -19,7 +24,8 @@ namespace engine {
         bool IsQuit() override;
 
     protected:
-        bool b_quit_;
+        static bool m_bQuit;
+        engine::GfxConfiguration m_Config;
     };
 }
 

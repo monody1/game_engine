@@ -20,8 +20,13 @@ add_subdirectory(
         ${CMAKE_SOURCE_DIR}/empty
 )
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/googletest-master)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/googletest-master)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test)
+add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/glfw-master)
+
+add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/platform/macosx
+)
 
 #add_subdirectory(
 #        ${CMAKE_SOURCE_DIR}/third_party/glfw-master

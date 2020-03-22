@@ -11,7 +11,9 @@
 #endif
 
 engine::Allocator::Allocator(size_t data_size, size_t page_size, size_t alignment)
-        : m_pPageList(nullptr), m_pFreeList(nullptr){
+        : m_pPageList(nullptr), m_pFreeList(nullptr),
+        m_szPageSize(0),m_szDataSize(0), m_szAlignmentSize(0),
+        m_szBlockSize(0), m_nBlocksPerPage(0){
     Reset(data_size, page_size, alignment);
 }
 
