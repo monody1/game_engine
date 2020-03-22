@@ -10,10 +10,10 @@
 
 namespace engine{
     struct BlockHeader{
-        BlockHeader* pNext_;
+        BlockHeader* pNext_ = nullptr;
     };
     struct PageHeader{
-        PageHeader* pNext_;
+        PageHeader* pNext_ = nullptr;
         BlockHeader* Blocks(){
             return reinterpret_cast<BlockHeader*>(this + 1);
         }
@@ -36,7 +36,7 @@ namespace engine{
 
         BlockHeader* NextBlock(BlockHeader* pBlock);
 
-#if defined (_DEBUG)
+#if defined (MY_DEBUG)
         void FillFreePage(PageHeader* page);
         void FillFreeBlock(BlockHeader* block);
         void FillAllocatedBlock(BlockHeader* block);
@@ -46,19 +46,19 @@ namespace engine{
         Allocator &operator=(const Allocator &rhs) = delete;
 
     private:
-        size_t m_szDataSize{};
-        size_t m_szPageSize{};
-        size_t m_szAlignmentSize{};
-        size_t m_szBlockSize{};
-        uint32_t m_nBlocksPerPage{};
+        size_t m_szDataSize;
+        size_t m_szPageSize;
+        size_t m_szAlignmentSize;
+        size_t m_szBlockSize;
+        uint32_t m_nBlocksPerPage;
 
-        PageHeader* m_pPageList{};
+        PageHeader* m_pPageList;
 
-        BlockHeader* m_pFreeList{};
+        BlockHeader* m_pFreeList;
 
-        uint32_t m_nPages{};
-        uint32_t m_nBlocks{};
-        uint32_t m_nFreeBlocks{};
+        uint32_t m_nPages;
+        uint32_t m_nBlocks;
+        uint32_t m_nFreeBlocks;
     };
 }
 

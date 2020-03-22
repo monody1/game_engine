@@ -10,7 +10,8 @@
 #define ALIGN(x, a)         (((x) + ((a) - 1)) & ~((a) - 1))
 #endif
 
-engine::Allocator::Allocator(size_t data_size, size_t page_size, size_t alignment) {
+engine::Allocator::Allocator(size_t data_size, size_t page_size, size_t alignment)
+        : m_pPageList(nullptr), m_pFreeList(nullptr){
     Reset(data_size, page_size, alignment);
 }
 
@@ -21,9 +22,12 @@ engine::Allocator::~Allocator() {
 void engine::Allocator::Reset(size_t data_size, size_t page_size, size_t alignment) {
     FreeAll();
 
+    m_szDataSize = data_size;
+    m_szPageSize = page_size;
+
     size_t minimal_size = (sizeof(BlockHeader) > m_szDataSize) ? sizeof(BlockHeader) : m_szDataSize;
 
-#if defined (_DEBUG)
+#if defined (MY_DEBUG)
     assert((alignment > 0 && (alignment & (alignment - 1))) == 0);
 #endif
     m_szBlockSize = ALIGN(minimal_size, alignment);
@@ -35,11 +39,12 @@ void engine::Allocator::Reset(size_t data_size, size_t page_size, size_t alignme
 
 void *engine::Allocator::Allocate() {
     if (!m_pFreeList){
-        auto* pNewPage = reinterpret_cast<PageHeader*>(new uint8_t[m_szPageSize]);
+        auto pNewPage = reinterpret_cast<PageHeader*>(new uint8_t[m_szPageSize]);
+        pNewPage -> pNext_ = nullptr;
         ++m_nPages;
         m_nBlocks += m_nBlocksPerPage;
         m_nFreeBlocks += m_nBlocksPerPage;
-#if defined(_DEBUG)
+#if defined(MY_DEBUG)
         FillFreePage(pNewPage);
 #endif
         if (m_pPageList){
@@ -58,7 +63,7 @@ void *engine::Allocator::Allocate() {
     BlockHeader* freeBlock = m_pFreeList;
     m_pFreeList = m_pFreeList -> pNext_;
     --m_nFreeBlocks;
-#if defined(_DEBUG)
+#if defined(MY_DEBUG)
     FillAllocatedBlock(freeBlock);
 #endif
     return reinterpret_cast<void*>(freeBlock);
@@ -66,7 +71,7 @@ void *engine::Allocator::Allocate() {
 
 void engine::Allocator::Free(void *p) {
     auto block = reinterpret_cast<BlockHeader*>(p);
-#if defined(_DEBUG)
+#if defined(MY_DEBUG)
     FillFreeBlock(block);
 #endif
     block -> pNext_ = m_pFreeList;
@@ -93,7 +98,7 @@ engine::BlockHeader *engine::Allocator::NextBlock(engine::BlockHeader *pBlock) {
     return reinterpret_cast<BlockHeader*>(reinterpret_cast<uint8_t*>(pBlock) + m_szBlockSize);
 }
 
-#if defined(_DEBUG)
+#if defined(MY_DEBUG)
 void engine::Allocator::FillFreePage(engine::PageHeader *page) {
     page -> pNext_ = nullptr;
 
