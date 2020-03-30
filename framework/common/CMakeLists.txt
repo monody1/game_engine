@@ -3,5 +3,6 @@ add_library(
         base_application.cpp
         graphics_manager.cpp
         allocator.cpp
+        memory_manager.cpp
         main.cpp
 )

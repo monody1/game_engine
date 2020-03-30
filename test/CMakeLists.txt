@@ -1,10 +1,10 @@
 #add_executable(allocator_test)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/googletest-master)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/external/googletest-master)
 
 add_executable(allocator_test)
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-#message(${gtest_SOURCE_DIR})
+message(${gtest_SOURCE_DIR})
 
 target_sources(
         allocator_test

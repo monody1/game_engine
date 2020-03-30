@@ -6,7 +6,7 @@
 
 namespace engine{
     GfxConfiguration config;
-    BaseApplication g_App = OsxApplication(config);
+    OsxApplication g_App = OsxApplication(config);
     IApplication *g_pApp = &g_App;
 }
 
@@ -22,6 +22,7 @@ int engine::OsxApplication::Initialize() {
 
     m_pWindow = glfwCreateWindow(config.screenWidth, config.screenHeight, config.windowTitle.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(m_pWindow);
+    glfwSetWindowCloseCallback(m_pWindow, OsxApplication::CloseCallback);
     return res;
 }
 
@@ -38,7 +39,11 @@ void engine::OsxApplication::Tick() {
 }
 
 bool engine::OsxApplication::IsQuit() {
-    return BaseApplication::IsQuit();
+    return m_bQuit;
 }
 
 engine::OsxApplication::OsxApplication(const engine::GfxConfiguration &Config) : BaseApplication(Config) {}
+
+void engine::OsxApplication::CloseCallback(GLFWwindow *window) {
+    BaseApplication::m_bQuit = true;
+}

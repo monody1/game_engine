@@ -23,6 +23,8 @@ namespace engine {
         void Tick() override;
 
         bool IsQuit() override;
+
+        static void CloseCallback(GLFWwindow* window);
     };
 }
 
