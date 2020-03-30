@@ -16,13 +16,17 @@ add_subdirectory(
         ${CMAKE_SOURCE_DIR}/framework
 )
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/test)
-add_subdirectory(${CMAKE_SOURCE_DIR}/external/googletest-master)
-add_subdirectory(${CMAKE_SOURCE_DIR}/external/glfw-master)
-add_subdirectory(${CMAKE_SOURCE_DIR}/external/glad-master)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/test)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/external/googletest-master)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/external/glfw-master)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/external/glad-master)
 
 add_subdirectory(
         ${CMAKE_SOURCE_DIR}/platform/macosx
+)
+
+add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/platform/windows
 )
 
 #add_subdirectory(
